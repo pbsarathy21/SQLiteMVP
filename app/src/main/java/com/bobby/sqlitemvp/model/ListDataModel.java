@@ -9,6 +9,7 @@ import com.bobby.sqlitemvp.presenter.ListDataPresenter;
 import com.bobby.sqlitemvp.utilities.DatabaseHelper;
 import com.bobby.sqlitemvp.view.ListDataView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListDataModel implements ListDataPresenter{
@@ -26,25 +27,26 @@ public class ListDataModel implements ListDataPresenter{
     @Override
     public void loadData() {
 
+        userList = new ArrayList<>();
+
         DatabaseHelper databaseHelper = new DatabaseHelper(context);
-        Cursor cursor = databaseHelper.getAllData();
 
-        if (cursor.moveToFirst())
-        {
-            do {
-                userList.add(new User(cursor.getString(1), cursor.getString(4)));
-            } while (cursor.moveToNext());
-        }
+      Cursor cursor = databaseHelper.getAllData();
 
-        if (!userList.isEmpty())
-        {
-            userAdapter = new UserAdapter(userList, context);
-            listDataView.listSuccess(userAdapter);
-        }
+      if (cursor.getCount()>0)
+      {
+          while (cursor.moveToNext())
+          {
+              userList.add(new User(cursor.getString(1), cursor.getString(4)));
+          }
 
-        else
-        {
-            listDataView.listFailure();
-        }
+          userAdapter = new UserAdapter(userList, context);
+          listDataView.listSuccess(userAdapter);
+      }
+
+      else
+      {
+          listDataView.listFailure();
+      }
     }
 }

@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.bobby.sqlitemvp.R;
 import com.bobby.sqlitemvp.adapters.UserAdapter;
@@ -41,7 +42,8 @@ public class ListDataActivity extends AppCompatActivity implements ListDataView{
     @Override
     public void listFailure() {
 
-        new DialogBox(this, "ERROR", "Unable to load data");
+       // new DialogBox(this, "ERROR", "Unable to load data");
+        Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show();
 
     }
 }

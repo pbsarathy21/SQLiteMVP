@@ -16,4 +16,12 @@ public class User {
     public String getMobile() {
         return mobile;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 }
